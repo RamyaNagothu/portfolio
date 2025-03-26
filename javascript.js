@@ -37,16 +37,39 @@ function logClick(platform) {
 }
 
 // Project Carousel
-document.querySelector('.left-arrow').addEventListener('click', function() {
+document.querySelector('.left-arrow').addEventListener('click', function () {
     let carousel = document.querySelector('.project-content');
     let firstItem = document.querySelector('.project-item');
-    carousel.insertBefore(firstItem, null);
-    carousel.style.transform = 'translateX(-250px)';
+
+    // Move first item to the end
+    carousel.appendChild(firstItem);
+
+    // Reset transition to prevent glitches
+    carousel.style.transition = "none";
+    carousel.style.transform = "translateX(-250px)";
+
+    // Allow animation after a small delay
+    setTimeout(() => {
+        carousel.style.transition = "transform 0.5s ease-in-out";
+        carousel.style.transform = "translateX(0)";
+    }, 10);
 });
 
-document.querySelector('.right-arrow').addEventListener('click', function() {
+document.querySelector('.right-arrow').addEventListener('click', function () {
     let carousel = document.querySelector('.project-content');
     let lastItem = document.querySelector('.project-item:last-child');
+
+    // Move last item to the beginning
     carousel.insertBefore(lastItem, carousel.firstChild);
-    carousel.style.transform = 'translateX(250px)';
+
+    // Reset transition
+    carousel.style.transition = "none";
+    carousel.style.transform = "translateX(250px)";
+
+    // Allow animation after a small delay
+    setTimeout(() => {
+        carousel.style.transition = "transform 0.5s ease-in-out";
+        carousel.style.transform = "translateX(0)";
+    }, 10);
 });
+
